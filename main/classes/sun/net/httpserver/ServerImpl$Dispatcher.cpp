@@ -161,7 +161,7 @@ void ServerImpl$Dispatcher::handleEvent($Event* r) {
 			if (t->close$ || $nc(this->this$0->idleConnections)->size() >= $ServerImpl::MAX_IDLE_CONNECTIONS) {
 				$nc(c)->close();
 				$nc(this->this$0->allConnections)->remove(c);
-			} else if (is->isDataBuffered()) {
+			} else if ($nc(is)->isDataBuffered()) {
 				this->this$0->requestStarted(c);
 				handle($($nc(c)->getChannel()), c);
 			} else {

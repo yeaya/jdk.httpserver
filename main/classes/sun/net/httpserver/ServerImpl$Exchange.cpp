@@ -296,7 +296,7 @@ void ServerImpl$Exchange::run() {
 			if (chdr == nullptr) {
 				$nc(this->tx)->close$ = true;
 				$nc(rheaders)->set("Connection"_s, "close"_s);
-			} else if (chdr->equalsIgnoreCase("keep-alive"_s)) {
+			} else if ($nc(chdr)->equalsIgnoreCase("keep-alive"_s)) {
 				$nc(rheaders)->set("Connection"_s, "keep-alive"_s);
 				int32_t idle = (int32_t)($ServerConfig::getIdleInterval() / 1000);
 				int32_t max = $ServerConfig::getMaxIdleConnections();

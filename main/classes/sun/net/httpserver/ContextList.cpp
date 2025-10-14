@@ -105,7 +105,7 @@ $HttpContextImpl* ContextList::findContext($String* protocol$renamed, $String* p
 					$var($String, cpath, $nc(ctx)->getPath());
 					if (exact && !$nc(cpath)->equals(path)) {
 						continue;
-					} else if (!exact && !path->startsWith(cpath)) {
+					} else if (!exact && !$nc(path)->startsWith(cpath)) {
 						continue;
 					}
 					int32_t var$0 = $nc(cpath)->length();
