@@ -114,6 +114,7 @@ void SSLStreams$OutputStream::write($bytes* b) {
 }
 
 void SSLStreams$OutputStream::write($bytes* b, int32_t off, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (this->closed) {
 		$throwNew($IOException, "output stream is closed"_s);
 	}
@@ -139,6 +140,7 @@ void SSLStreams$OutputStream::flush() {
 }
 
 void SSLStreams$OutputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	$var($SSLStreams$WrapperResult, r, nullptr);
 	$nc(this->this$0->engine)->closeOutbound();
 	this->closed = true;

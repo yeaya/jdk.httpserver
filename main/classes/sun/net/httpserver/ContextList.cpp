@@ -90,6 +90,7 @@ $HttpContextImpl* ContextList::findContext($String* protocol, $String* path) {
 
 $HttpContextImpl* ContextList::findContext($String* protocol$renamed, $String* path, bool exact) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($String, protocol, protocol$renamed);
 		$assign(protocol, $nc(protocol)->toLowerCase());
 		$var($String, longest, ""_s);
@@ -132,6 +133,7 @@ void ContextList::remove($String* protocol, $String* path) {
 
 void ContextList::remove($HttpContextImpl* context) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		{
 			$var($Iterator, i$, $nc(this->list)->iterator());
 			for (; $nc(i$)->hasNext();) {

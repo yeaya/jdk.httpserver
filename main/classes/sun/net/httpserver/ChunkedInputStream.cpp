@@ -139,6 +139,7 @@ int32_t ChunkedInputStream::readChunkHeader() {
 }
 
 int32_t ChunkedInputStream::readImpl($bytes* b, int32_t off, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (this->eof) {
 		return -1;
 	}

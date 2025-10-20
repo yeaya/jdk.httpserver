@@ -175,6 +175,7 @@ void ServerImpl$Exchange::init$($ServerImpl* this$0, $SocketChannel* chan, $Stri
 }
 
 void ServerImpl$Exchange::run() {
+	$useLocalCurrentObjectStackCache();
 	$init($System$Logger$Level);
 	$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "exchange started"_s);
 	$set(this, context, $nc(this->connection)->getHttpContext());
@@ -347,6 +348,7 @@ void ServerImpl$Exchange::run() {
 }
 
 void ServerImpl$Exchange::reject(int32_t code, $String* requestStr, $String* message) {
+	$useLocalCurrentObjectStackCache();
 	this->rejected = true;
 	this->this$0->logReply(code, requestStr, message);
 	sendReply(code, false, $$str({"<h1>"_s, $$str(code), $($Code::msg(code)), "</h1>"_s, message}));
@@ -354,6 +356,7 @@ void ServerImpl$Exchange::reject(int32_t code, $String* requestStr, $String* mes
 }
 
 void ServerImpl$Exchange::sendReply(int32_t code, bool closeNow, $String* text$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, text, text$renamed);
 	try {
 		$var($StringBuilder, builder, $new($StringBuilder, 512));

@@ -153,6 +153,7 @@ $Object* allocate$SSLStreams($Class* clazz) {
 bool SSLStreams::$assertionsDisabled = false;
 
 void SSLStreams::init$($ServerImpl* server, $SSLContext* sslctx, $SocketChannel* chan) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, handshaking, $new($ReentrantLock));
 	$set(this, server, server);
 	$set(this, time, static_cast<$TimeSource*>(server));
@@ -168,6 +169,7 @@ void SSLStreams::init$($ServerImpl* server, $SSLContext* sslctx, $SocketChannel*
 }
 
 void SSLStreams::configureEngine($HttpsConfigurator* cfg, $InetSocketAddress* addr) {
+	$useLocalCurrentObjectStackCache();
 	if (cfg != nullptr) {
 		$var($SSLStreams$Parameters, params, $new($SSLStreams$Parameters, this, cfg, addr));
 		cfg->configure(params);
@@ -226,6 +228,7 @@ $ByteBuffer* SSLStreams::allocate($SSLStreams$BufType* type) {
 }
 
 $ByteBuffer* SSLStreams::allocate($SSLStreams$BufType* type, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (!SSLStreams::$assertionsDisabled && !(this->engine != nullptr)) {
 		$throwNew($AssertionError);
 	}
@@ -256,6 +259,7 @@ $ByteBuffer* SSLStreams::allocate($SSLStreams$BufType* type, int32_t len) {
 }
 
 $ByteBuffer* SSLStreams::realloc($ByteBuffer* b$renamed, bool flip, $SSLStreams$BufType* type) {
+	$useLocalCurrentObjectStackCache();
 	$var($ByteBuffer, b, b$renamed);
 	$synchronized(this) {
 		int32_t nsize = 2 * $nc(b)->capacity();
@@ -289,6 +293,7 @@ $SSLStreams$WrapperResult* SSLStreams::sendData($ByteBuffer* src) {
 }
 
 $SSLStreams$WrapperResult* SSLStreams::recvData($ByteBuffer* dst$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($ByteBuffer, dst, dst$renamed);
 	$var($SSLStreams$WrapperResult, r, nullptr);
 	if (!SSLStreams::$assertionsDisabled && !($nc(dst)->position() == 0)) {
@@ -314,6 +319,7 @@ $SSLStreams$WrapperResult* SSLStreams::recvData($ByteBuffer* dst$renamed) {
 }
 
 void SSLStreams::doClosure() {
+	$useLocalCurrentObjectStackCache();
 	{
 		$var($Throwable, var$0, nullptr);
 		try {
@@ -344,6 +350,7 @@ void SSLStreams::doClosure() {
 }
 
 void SSLStreams::doHandshake($SSLEngineResult$HandshakeStatus* hs_status$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($SSLEngineResult$HandshakeStatus, hs_status, hs_status$renamed);
 	{
 		$var($Throwable, var$0, nullptr);

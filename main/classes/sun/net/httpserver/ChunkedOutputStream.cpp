@@ -137,6 +137,7 @@ void ChunkedOutputStream::write($bytes* b, int32_t off, int32_t len) {
 }
 
 void ChunkedOutputStream::writeChunk() {
+	$useLocalCurrentObjectStackCache();
 	$var($chars, c, $nc($($Integer::toHexString(this->count)))->toCharArray());
 	int32_t clen = c->length;
 	int32_t startByte = 4 - clen;
@@ -154,6 +155,7 @@ void ChunkedOutputStream::writeChunk() {
 }
 
 void ChunkedOutputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	if (this->closed) {
 		return;
 	}

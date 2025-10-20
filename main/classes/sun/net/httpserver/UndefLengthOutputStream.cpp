@@ -84,6 +84,7 @@ void UndefLengthOutputStream::write($bytes* b, int32_t off, int32_t len) {
 }
 
 void UndefLengthOutputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	if (this->closed) {
 		return;
 	}

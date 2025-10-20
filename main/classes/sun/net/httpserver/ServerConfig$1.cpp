@@ -69,6 +69,7 @@ void ServerConfig$1::init$() {
 }
 
 $Object* ServerConfig$1::run() {
+	$useLocalCurrentObjectStackCache();
 	$init($ServerConfig);
 	$ServerConfig::idleInterval = $nc($($Long::getLong("sun.net.httpserver.idleInterval"_s, (int64_t)30)))->longValue() * 1000;
 	$ServerConfig::clockTick = $nc($($Integer::getInteger("sun.net.httpserver.clockTick"_s, 10000)))->intValue();

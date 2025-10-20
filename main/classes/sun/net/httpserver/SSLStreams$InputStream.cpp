@@ -139,6 +139,7 @@ void SSLStreams$InputStream::reset() {
 }
 
 int64_t SSLStreams$InputStream::skip(int64_t s) {
+	$useLocalCurrentObjectStackCache();
 	int32_t n = (int32_t)s;
 	if (this->closed) {
 		$throwNew($IOException, "SSL stream is closed"_s);

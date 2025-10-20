@@ -81,6 +81,7 @@ void AuthFilter::setAuthenticator($Authenticator* a) {
 }
 
 void AuthFilter::consumeInput($HttpExchange* t) {
+	$useLocalCurrentObjectStackCache();
 	$var($InputStream, i, $nc(t)->getRequestBody());
 	$var($bytes, b, $new($bytes, 4096));
 	while ($nc(i)->read(b) != -1) {
@@ -89,6 +90,7 @@ void AuthFilter::consumeInput($HttpExchange* t) {
 }
 
 void AuthFilter::doFilter($HttpExchange* t, $Filter$Chain* chain) {
+	$useLocalCurrentObjectStackCache();
 	if (this->authenticator != nullptr) {
 		$var($Authenticator$Result, r, $nc(this->authenticator)->authenticate(t));
 		if ($instanceOf($Authenticator$Success, r)) {

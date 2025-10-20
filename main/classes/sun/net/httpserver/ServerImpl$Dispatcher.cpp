@@ -139,6 +139,7 @@ void ServerImpl$Dispatcher::init$($ServerImpl* this$0) {
 }
 
 void ServerImpl$Dispatcher::handleEvent($Event* r) {
+	$useLocalCurrentObjectStackCache();
 	$var($ExchangeImpl, t, $nc(r)->exchange);
 	$var($HttpConnection, c, $nc(t)->getConnection());
 	try {
@@ -177,6 +178,7 @@ void ServerImpl$Dispatcher::handleEvent($Event* r) {
 }
 
 void ServerImpl$Dispatcher::reRegister($HttpConnection* c) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($SocketChannel, chan, $nc(c)->getChannel());
 		$nc(chan)->configureBlocking(false);
@@ -196,6 +198,7 @@ void ServerImpl$Dispatcher::reRegister($HttpConnection* c) {
 }
 
 void ServerImpl$Dispatcher::run() {
+	$useLocalCurrentObjectStackCache();
 	while (!this->this$0->finished) {
 		try {
 			$var($List, list, nullptr);
@@ -301,6 +304,7 @@ void ServerImpl$Dispatcher::handleException($SelectionKey* key, $Exception* e) {
 }
 
 void ServerImpl$Dispatcher::handle($SocketChannel* chan, $HttpConnection* conn) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($ServerImpl$Exchange, t, $new($ServerImpl$Exchange, this->this$0, chan, this->this$0->protocol, conn));
 		$nc(this->this$0->executor)->execute(t);

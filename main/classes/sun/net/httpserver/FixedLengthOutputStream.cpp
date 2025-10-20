@@ -103,6 +103,7 @@ void FixedLengthOutputStream::write($bytes* b, int32_t off, int32_t len) {
 }
 
 void FixedLengthOutputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	if (this->closed) {
 		return;
 	}

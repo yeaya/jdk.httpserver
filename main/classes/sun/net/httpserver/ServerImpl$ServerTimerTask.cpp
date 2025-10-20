@@ -75,6 +75,7 @@ void ServerImpl$ServerTimerTask::init$($ServerImpl* this$0) {
 }
 
 void ServerImpl$ServerTimerTask::run() {
+	$useLocalCurrentObjectStackCache();
 	$var($LinkedList, toClose, $new($LinkedList));
 	this->this$0->time = $System::currentTimeMillis();
 	++this->this$0->ticks;

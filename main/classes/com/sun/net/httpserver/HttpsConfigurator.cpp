@@ -63,6 +63,7 @@ $SSLContext* HttpsConfigurator::getSSLContext() {
 }
 
 void HttpsConfigurator::configure($HttpsParameters* params) {
+	$useLocalCurrentObjectStackCache();
 	$nc(params)->setSSLParameters($($nc($(getSSLContext()))->getDefaultSSLParameters()));
 }
 

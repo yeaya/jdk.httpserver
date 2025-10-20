@@ -139,6 +139,7 @@ $Object* allocate$UnmodifiableHeaders($Class* clazz) {
 }
 
 void UnmodifiableHeaders::init$($Headers* headers) {
+	$useLocalCurrentObjectStackCache();
 	$Headers::init$();
 	$var($Headers, h, headers);
 	$var($Headers, unmodHeaders, $new($Headers));

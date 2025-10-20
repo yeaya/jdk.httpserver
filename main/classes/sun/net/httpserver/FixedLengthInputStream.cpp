@@ -66,6 +66,7 @@ void FixedLengthInputStream::init$($ExchangeImpl* t, $InputStream* src, int64_t 
 }
 
 int32_t FixedLengthInputStream::readImpl($bytes* b, int32_t off, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	this->eof = (this->remaining == (int64_t)0);
 	if (this->eof) {
 		return -1;

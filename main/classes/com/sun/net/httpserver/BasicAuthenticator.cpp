@@ -100,6 +100,7 @@ $String* BasicAuthenticator::getRealm() {
 }
 
 $Authenticator$Result* BasicAuthenticator::authenticate($HttpExchange* t) {
+	$useLocalCurrentObjectStackCache();
 	$var($Headers, rmap, $nc(t)->getRequestHeaders());
 	$var($String, auth, $nc(rmap)->getFirst("Authorization"_s));
 	if (auth == nullptr) {
@@ -124,6 +125,7 @@ $Authenticator$Result* BasicAuthenticator::authenticate($HttpExchange* t) {
 }
 
 void BasicAuthenticator::setAuthHeader($HttpExchange* t) {
+	$useLocalCurrentObjectStackCache();
 	$var($Headers, map, $nc(t)->getResponseHeaders());
 	$var($String, authString, $str({"Basic realm=\""_s, this->realm, "\""_s, (this->isUTF8 ? ", charset=\"UTF-8\""_s : ""_s)}));
 	$nc(map)->set("WWW-Authenticate"_s, authString);

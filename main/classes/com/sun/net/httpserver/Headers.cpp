@@ -139,6 +139,7 @@ $Object* Headers::get(Object$* key) {
 }
 
 $String* Headers::getFirst($String* key) {
+	$useLocalCurrentObjectStackCache();
 	$var($List, l, $cast($List, $nc(this->map)->get($(normalize(key)))));
 	if (l == nullptr) {
 		return nullptr;
@@ -147,6 +148,7 @@ $String* Headers::getFirst($String* key) {
 }
 
 $List* Headers::put($String* key, $List* value) {
+	$useLocalCurrentObjectStackCache();
 	{
 		$var($Iterator, i$, $nc(value)->iterator());
 		for (; $nc(i$)->hasNext();) {
@@ -158,6 +160,7 @@ $List* Headers::put($String* key, $List* value) {
 }
 
 void Headers::add($String* key, $String* value) {
+	$useLocalCurrentObjectStackCache();
 	checkValue(value);
 	$var($String, k, normalize(key));
 	$var($List, l, $cast($List, $nc(this->map)->get(k)));

@@ -106,6 +106,7 @@ $Object* HttpServerProvider::lock = nullptr;
 HttpServerProvider* HttpServerProvider::provider$ = nullptr;
 
 void HttpServerProvider::init$() {
+	$useLocalCurrentObjectStackCache();
 	$var($SecurityManager, sm, $System::getSecurityManager());
 	if (sm != nullptr) {
 		sm->checkPermission($$new($RuntimePermission, "httpServerProvider"_s));
@@ -114,6 +115,7 @@ void HttpServerProvider::init$() {
 
 bool HttpServerProvider::loadProviderFromProperty() {
 	$init(HttpServerProvider);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($String, cn, $System::getProperty("com.sun.net.httpserver.HttpServerProvider"_s));
 	if (cn == nullptr) {
@@ -141,6 +143,7 @@ bool HttpServerProvider::loadProviderFromProperty() {
 
 bool HttpServerProvider::loadProviderAsService() {
 	$init(HttpServerProvider);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Iterator, i, $nc($($ServiceLoader::load(HttpServerProvider::class$, $($ClassLoader::getSystemClassLoader()))))->iterator());
 	for (;;) {

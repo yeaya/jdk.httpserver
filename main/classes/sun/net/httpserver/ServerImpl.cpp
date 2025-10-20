@@ -271,6 +271,7 @@ bool ServerImpl::timer1Enabled = false;
 bool ServerImpl::debug = false;
 
 void ServerImpl::init$($HttpServer* wrapper, $String* protocol, $InetSocketAddress* addr, int32_t backlog) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$set(this, lolock, $new($Object));
 	this->finished = false;
@@ -371,6 +372,7 @@ bool ServerImpl::isFinishing() {
 }
 
 void ServerImpl::stop(int32_t delay) {
+	$useLocalCurrentObjectStackCache();
 	if (delay < 0) {
 		$throwNew($IllegalArgumentException, "negative delay parameter"_s);
 	}
@@ -421,6 +423,7 @@ void ServerImpl::stop(int32_t delay) {
 
 $HttpContextImpl* ServerImpl::createContext($String* path, $HttpHandler* handler) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (handler == nullptr || path == nullptr) {
 			$throwNew($NullPointerException, "null handler, or path parameter"_s);
 		}
@@ -434,6 +437,7 @@ $HttpContextImpl* ServerImpl::createContext($String* path, $HttpHandler* handler
 
 $HttpContextImpl* ServerImpl::createContext($String* path) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (path == nullptr) {
 			$throwNew($NullPointerException, "null path parameter"_s);
 		}
@@ -458,6 +462,7 @@ void ServerImpl::removeContext($String* path) {
 
 void ServerImpl::removeContext($HttpContext* context) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (!($instanceOf($HttpContextImpl, context))) {
 			$throwNew($IllegalArgumentException, "wrong HttpContext type"_s);
 		}
@@ -543,6 +548,7 @@ void ServerImpl::closeConnection($HttpConnection* conn) {
 }
 
 void ServerImpl::logReply(int32_t code, $String* requestStr, $String* text$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, text, text$renamed);
 	$init($System$Logger$Level);
 	if (!$nc(this->logger)->isLoggable($System$Logger$Level::DEBUG)) {
@@ -628,6 +634,7 @@ void ServerImpl::responseCompleted($HttpConnection* c) {
 }
 
 void ServerImpl::logStackTrace($String* s) {
+	$useLocalCurrentObjectStackCache();
 	$init($System$Logger$Level);
 	$nc(this->logger)->log($System$Logger$Level::TRACE, s);
 	$var($StringBuilder, b, $new($StringBuilder));
@@ -649,6 +656,7 @@ int64_t ServerImpl::getTimeMillis(int64_t secs) {
 
 bool ServerImpl::isValidHeaderKey($String* token) {
 	$init(ServerImpl);
+	$useLocalCurrentObjectStackCache();
 	if (token == nullptr) {
 		return false;
 	}

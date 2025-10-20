@@ -165,6 +165,7 @@ $SocketChannel* HttpConnection::getChannel() {
 
 void HttpConnection::close() {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (this->closed) {
 			return;
 		}

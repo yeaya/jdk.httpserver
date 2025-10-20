@@ -152,6 +152,7 @@ $String* Request::requestLine() {
 }
 
 $Headers* Request::headers() {
+	$useLocalCurrentObjectStackCache();
 	if (this->hdrs != nullptr) {
 		return this->hdrs;
 	}

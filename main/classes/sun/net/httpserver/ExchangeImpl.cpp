@@ -403,6 +403,7 @@ $PlaceholderOutputStream* ExchangeImpl::getPlaceholderResponseBody() {
 }
 
 void ExchangeImpl::sendResponseHeaders(int32_t rCode, int64_t contentLen) {
+	$useLocalCurrentObjectStackCache();
 	$var($System$Logger, logger, $nc(this->server)->getLogger());
 	if (this->sentHeaders) {
 		$throwNew($IOException, "headers already sent"_s);
@@ -475,6 +476,7 @@ void ExchangeImpl::sendResponseHeaders(int32_t rCode, int64_t contentLen) {
 }
 
 void ExchangeImpl::write($Headers* map, $OutputStream* os) {
+	$useLocalCurrentObjectStackCache();
 	$var($Set, entries, $nc(map)->entrySet());
 	{
 		$var($Iterator, i$, $nc(entries)->iterator());
@@ -523,6 +525,7 @@ $bytes* ExchangeImpl::bytes($String* s, int32_t extra) {
 }
 
 $InetSocketAddress* ExchangeImpl::getRemoteAddress() {
+	$useLocalCurrentObjectStackCache();
 	$var($Socket, s, $nc($($nc(this->connection)->getChannel()))->socket());
 	$var($InetAddress, ia, $nc(s)->getInetAddress());
 	int32_t port = s->getPort();
@@ -530,6 +533,7 @@ $InetSocketAddress* ExchangeImpl::getRemoteAddress() {
 }
 
 $InetSocketAddress* ExchangeImpl::getLocalAddress() {
+	$useLocalCurrentObjectStackCache();
 	$var($Socket, s, $nc($($nc(this->connection)->getChannel()))->socket());
 	$var($InetAddress, ia, $nc(s)->getLocalAddress());
 	int32_t port = s->getLocalPort();
@@ -611,6 +615,7 @@ ExchangeImpl* ExchangeImpl::get($HttpExchange* t) {
 }
 
 void clinit$ExchangeImpl($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(ExchangeImpl::HEAD, "HEAD"_s);
 	ExchangeImpl::$assertionsDisabled = !ExchangeImpl::class$->desiredAssertionStatus();
 	{
