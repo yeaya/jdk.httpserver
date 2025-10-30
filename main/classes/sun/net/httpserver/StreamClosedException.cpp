@@ -1,13 +1,6 @@
 #include <sun/net/httpserver/StreamClosedException.h>
 
 #include <java/io/IOException.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <jcpp.h>
 
 using $IOException = ::java::io::IOException;
@@ -49,16 +42,10 @@ void StreamClosedException::init$() {
 StreamClosedException::StreamClosedException() {
 }
 
-StreamClosedException::StreamClosedException(const StreamClosedException& e) {
+StreamClosedException::StreamClosedException(const StreamClosedException& e) : $IOException(e) {
 }
 
-StreamClosedException StreamClosedException::wrapper$() {
-	$pendingException(this);
-	return *this;
-}
-
-void StreamClosedException::throwWrapper$() {
-	$pendingException(this);
+void StreamClosedException::throw$() {
 	throw *this;
 }
 

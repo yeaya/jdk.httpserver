@@ -4,16 +4,7 @@
 #include <com/sun/net/httpserver/HttpContext.h>
 #include <com/sun/net/httpserver/HttpHandler.h>
 #include <com/sun/net/httpserver/HttpServer.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/IllegalArgumentException.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/NullPointerException.h>
-#include <java/lang/String.h>
 #include <java/lang/System$Logger.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/util/AbstractMap.h>
 #include <java/util/List.h>
 #include <java/util/Map.h>

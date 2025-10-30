@@ -3,17 +3,8 @@
 #include <java/io/IOException.h>
 #include <java/io/InputStream.h>
 #include <java/io/OutputStream.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/Exception.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/InnerClassInfo.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/String.h>
 #include <java/lang/System$Logger$Level.h>
 #include <java/lang/System$Logger.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/nio/channels/SelectionKey.h>
 #include <java/nio/channels/SocketChannel.h>
 #include <java/nio/channels/spi/AbstractInterruptibleChannel.h>
@@ -182,30 +173,26 @@ void HttpConnection::close() {
 			if (this->raw != nullptr) {
 				$nc(this->raw)->close();
 			}
-		} catch ($IOException&) {
-			$var($IOException, e, $catch());
+		} catch ($IOException& e) {
 			$ServerImpl::dprint(static_cast<$Exception*>(e));
 		}
 		try {
 			if (this->rawout != nullptr) {
 				$nc(this->rawout)->close();
 			}
-		} catch ($IOException&) {
-			$var($IOException, e, $catch());
+		} catch ($IOException& e) {
 			$ServerImpl::dprint(static_cast<$Exception*>(e));
 		}
 		try {
 			if (this->sslStreams != nullptr) {
 				$nc(this->sslStreams)->close();
 			}
-		} catch ($IOException&) {
-			$var($IOException, e, $catch());
+		} catch ($IOException& e) {
 			$ServerImpl::dprint(static_cast<$Exception*>(e));
 		}
 		try {
 			$nc(this->chan)->close();
-		} catch ($IOException&) {
-			$var($IOException, e, $catch());
+		} catch ($IOException& e) {
 			$ServerImpl::dprint(static_cast<$Exception*>(e));
 		}
 	}

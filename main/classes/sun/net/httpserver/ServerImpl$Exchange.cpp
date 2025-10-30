@@ -10,25 +10,9 @@
 #include <java/io/IOException.h>
 #include <java/io/InputStream.h>
 #include <java/io/OutputStream.h>
-#include <java/lang/Array.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/Exception.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/IllegalArgumentException.h>
-#include <java/lang/InnerClassInfo.h>
-#include <java/lang/Long.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/NullPointerException.h>
 #include <java/lang/NumberFormatException.h>
-#include <java/lang/RuntimeException.h>
-#include <java/lang/String.h>
-#include <java/lang/StringBuilder.h>
 #include <java/lang/System$Logger$Level.h>
 #include <java/lang/System$Logger.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/URI.h>
 #include <java/net/URISyntaxException.h>
 #include <java/nio/channels/SocketChannel.h>
@@ -324,24 +308,19 @@ void ServerImpl$Exchange::run() {
 		} else {
 			uc->doFilter($$new($HttpExchangeImpl, this->tx));
 		}
-	} catch ($IOException&) {
-		$var($IOException, e1, $catch());
+	} catch ($IOException& e1) {
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.Exchange (1)"_s, static_cast<$Throwable*>(e1));
 		this->this$0->closeConnection(this->connection);
-	} catch ($NumberFormatException&) {
-		$var($NumberFormatException, e2, $catch());
+	} catch ($NumberFormatException& e2) {
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.Exchange (2)"_s, static_cast<$Throwable*>(e2));
 		reject($Code::HTTP_BAD_REQUEST, requestLine, "NumberFormatException thrown"_s);
-	} catch ($URISyntaxException&) {
-		$var($URISyntaxException, e3, $catch());
+	} catch ($URISyntaxException& e3) {
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.Exchange (3)"_s, static_cast<$Throwable*>(e3));
 		reject($Code::HTTP_BAD_REQUEST, requestLine, "URISyntaxException thrown"_s);
-	} catch ($Exception&) {
-		$var($Exception, e4, $catch());
+	} catch ($Exception& e4) {
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.Exchange (4)"_s, static_cast<$Throwable*>(e4));
 		this->this$0->closeConnection(this->connection);
-	} catch ($Throwable&) {
-		$var($Throwable, t, $catch());
+	} catch ($Throwable& t) {
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.Exchange (5)"_s, t);
 		$throw(t);
 	}
@@ -378,8 +357,7 @@ void ServerImpl$Exchange::sendReply(int32_t code, bool closeNow, $String* text$r
 		if (closeNow) {
 			this->this$0->closeConnection(this->connection);
 		}
-	} catch ($IOException&) {
-		$var($IOException, e, $catch());
+	} catch ($IOException& e) {
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "ServerImpl.sendReply"_s, static_cast<$Throwable*>(e));
 		this->this$0->closeConnection(this->connection);

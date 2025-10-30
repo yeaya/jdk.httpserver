@@ -5,13 +5,6 @@
 #include <com/sun/net/httpserver/HttpServer.h>
 #include <com/sun/net/httpserver/HttpsConfigurator.h>
 #include <com/sun/net/httpserver/HttpsServer.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/InetSocketAddress.h>
 #include <java/util/concurrent/Executor.h>
 #include <sun/net/httpserver/HttpContextImpl.h>

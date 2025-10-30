@@ -1,13 +1,5 @@
 #include <sun/net/httpserver/HttpError.h>
 
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/RuntimeException.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <jcpp.h>
 
 using $ClassInfo = ::java::lang::ClassInfo;
@@ -49,16 +41,10 @@ void HttpError::init$($String* msg) {
 HttpError::HttpError() {
 }
 
-HttpError::HttpError(const HttpError& e) {
+HttpError::HttpError(const HttpError& e) : $RuntimeException(e) {
 }
 
-HttpError HttpError::wrapper$() {
-	$pendingException(this);
-	return *this;
-}
-
-void HttpError::throwWrapper$() {
-	$pendingException(this);
+void HttpError::throw$() {
 	throw *this;
 }
 

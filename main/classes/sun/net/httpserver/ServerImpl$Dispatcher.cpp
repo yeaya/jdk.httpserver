@@ -2,20 +2,9 @@
 
 #include <java/io/IOException.h>
 #include <java/lang/AssertionError.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/Exception.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/InnerClassInfo.h>
-#include <java/lang/MethodInfo.h>
 #include <java/lang/Runnable.h>
-#include <java/lang/RuntimeException.h>
-#include <java/lang/String.h>
 #include <java/lang/System$Logger$Level.h>
 #include <java/lang/System$Logger.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/Socket.h>
 #include <java/nio/channels/CancelledKeyException.h>
 #include <java/nio/channels/SelectableChannel.h>
@@ -169,8 +158,7 @@ void ServerImpl$Dispatcher::handleEvent($Event* r) {
 				$nc(this->connsToRegister)->add(c);
 			}
 		}
-	} catch ($IOException&) {
-		$var($IOException, e, $catch());
+	} catch ($IOException& e) {
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (1)"_s, static_cast<$Throwable*>(e));
 		$nc(c)->close();
@@ -188,8 +176,7 @@ void ServerImpl$Dispatcher::reRegister($HttpConnection* c) {
 		$init($ServerImpl);
 		c->time = this->this$0->getTime() + $ServerImpl::IDLE_INTERVAL;
 		$nc(this->this$0->idleConnections)->add(c);
-	} catch ($IOException&) {
-		$var($IOException, e, $catch());
+	} catch ($IOException& e) {
 		$ServerImpl::dprint(static_cast<$Exception*>(e));
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher(8)"_s, static_cast<$Throwable*>(e));
@@ -267,30 +254,25 @@ void ServerImpl$Dispatcher::run() {
 						} else if (!ServerImpl$Dispatcher::$assertionsDisabled) {
 							$throwNew($AssertionError, $of($$str({"Unexpected non-readable key:"_s, key})));
 						}
-					} catch ($CancelledKeyException&) {
-						$var($CancelledKeyException, e, $catch());
+					} catch ($CancelledKeyException& e) {
 						handleException(key, nullptr);
-					} catch ($IOException&) {
-						$var($IOException, e, $catch());
+					} catch ($IOException& e) {
 						handleException(key, e);
 					}
 				}
 			}
 			$nc(this->this$0->selector)->selectNow();
-		} catch ($IOException&) {
-			$var($IOException, e, $catch());
+		} catch ($IOException& e) {
 			$init($System$Logger$Level);
 			$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (4)"_s, static_cast<$Throwable*>(e));
-		} catch ($Exception&) {
-			$var($Exception, e, $catch());
+		} catch ($Exception& e) {
 			$init($System$Logger$Level);
 			$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (7)"_s, static_cast<$Throwable*>(e));
 		}
 	}
 	try {
 		$nc(this->this$0->selector)->close();
-	} catch ($Exception&) {
-		$catch();
+	} catch ($Exception& e) {
 	}
 }
 
@@ -304,22 +286,18 @@ void ServerImpl$Dispatcher::handleException($SelectionKey* key, $Exception* e) {
 }
 
 void ServerImpl$Dispatcher::handle($SocketChannel* chan, $HttpConnection* conn) {
-	$useLocalCurrentObjectStackCache();
 	try {
 		$var($ServerImpl$Exchange, t, $new($ServerImpl$Exchange, this->this$0, chan, this->this$0->protocol, conn));
 		$nc(this->this$0->executor)->execute(t);
-	} catch ($HttpError&) {
-		$var($HttpError, e1, $catch());
+	} catch ($HttpError& e1) {
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (4)"_s, static_cast<$Throwable*>(e1));
 		this->this$0->closeConnection(conn);
-	} catch ($IOException&) {
-		$var($IOException, e, $catch());
+	} catch ($IOException& e) {
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (5)"_s, static_cast<$Throwable*>(e));
 		this->this$0->closeConnection(conn);
-	} catch ($Throwable&) {
-		$var($Throwable, e, $catch());
+	} catch ($Throwable& e) {
 		$init($System$Logger$Level);
 		$nc(this->this$0->logger)->log($System$Logger$Level::TRACE, "Dispatcher (6)"_s, e);
 		this->this$0->closeConnection(conn);

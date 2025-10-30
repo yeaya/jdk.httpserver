@@ -4,13 +4,6 @@
 #include <com/sun/net/httpserver/Filter$2.h>
 #include <com/sun/net/httpserver/Filter$Chain.h>
 #include <com/sun/net/httpserver/HttpExchange.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/InnerClassInfo.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/util/Objects.h>
 #include <java/util/function/Consumer.h>
 #include <jcpp.h>

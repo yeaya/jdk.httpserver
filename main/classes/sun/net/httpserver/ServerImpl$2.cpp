@@ -1,15 +1,6 @@
 #include <sun/net/httpserver/ServerImpl$2.h>
 
-#include <java/lang/Array.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/EnclosingMethodInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/InnerClassInfo.h>
 #include <java/lang/NoSuchFieldError.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <sun/net/httpserver/HttpConnection$State.h>
 #include <sun/net/httpserver/ServerImpl.h>
 #include <jcpp.h>
@@ -75,18 +66,15 @@ void clinit$ServerImpl$2($Class* class$) {
 	{
 		try {
 			$nc(ServerImpl$2::$SwitchMap$sun$net$httpserver$HttpConnection$State)->set($HttpConnection$State::REQUEST->ordinal(), 1);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 		try {
 			$nc(ServerImpl$2::$SwitchMap$sun$net$httpserver$HttpConnection$State)->set($HttpConnection$State::RESPONSE->ordinal(), 2);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 		try {
 			$nc(ServerImpl$2::$SwitchMap$sun$net$httpserver$HttpConnection$State)->set($HttpConnection$State::IDLE->ordinal(), 3);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 	}
 }

@@ -2,25 +2,13 @@
 
 #include <com/sun/net/httpserver/HttpsServer.h>
 #include <com/sun/net/httpserver/spi/HttpServerProvider$1.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
 #include <java/lang/ClassLoader.h>
 #include <java/lang/ClassNotFoundException.h>
-#include <java/lang/Exception.h>
-#include <java/lang/FieldInfo.h>
 #include <java/lang/IllegalAccessException.h>
-#include <java/lang/InnerClassInfo.h>
 #include <java/lang/InstantiationException.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/NullPointerException.h>
 #include <java/lang/RuntimePermission.h>
 #include <java/lang/SecurityException.h>
 #include <java/lang/SecurityManager.h>
-#include <java/lang/String.h>
-#include <java/lang/System.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/InetSocketAddress.h>
 #include <java/security/AccessController.h>
 #include <java/security/BasicPermission.h>
@@ -125,17 +113,13 @@ bool HttpServerProvider::loadProviderFromProperty() {
 		$var($Object, o, $Class::forName(cn, true, $($ClassLoader::getSystemClassLoader()))->newInstance());
 		$assignStatic(HttpServerProvider::provider$, $cast(HttpServerProvider, o));
 		return true;
-	} catch ($ClassNotFoundException&) {
-		$var($Exception, x, $catch());
+	} catch ($ClassNotFoundException& x) {
 		$throwNew($ServiceConfigurationError, nullptr, x);
-	} catch ($IllegalAccessException&) {
-		$var($Exception, x, $catch());
+	} catch ($IllegalAccessException& x) {
 		$throwNew($ServiceConfigurationError, nullptr, x);
-	} catch ($InstantiationException&) {
-		$var($Exception, x, $catch());
+	} catch ($InstantiationException& x) {
 		$throwNew($ServiceConfigurationError, nullptr, x);
-	} catch ($SecurityException&) {
-		$var($Exception, x, $catch());
+	} catch ($SecurityException& x) {
 		$throwNew($ServiceConfigurationError, nullptr, x);
 	}
 	$shouldNotReachHere();
@@ -153,8 +137,7 @@ bool HttpServerProvider::loadProviderAsService() {
 			}
 			$assignStatic(HttpServerProvider::provider$, $cast(HttpServerProvider, $nc(i)->next()));
 			return true;
-		} catch ($ServiceConfigurationError&) {
-			$var($ServiceConfigurationError, sce, $catch());
+		} catch ($ServiceConfigurationError& sce) {
 			if ($instanceOf($SecurityException, $(sce->getCause()))) {
 				continue;
 			}

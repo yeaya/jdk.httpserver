@@ -3,18 +3,7 @@
 #include <java/io/FilterOutputStream.h>
 #include <java/io/IOException.h>
 #include <java/io/OutputStream.h>
-#include <java/lang/Array.h>
 #include <java/lang/AssertionError.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/Integer.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/String.h>
-#include <java/lang/System.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <sun/net/httpserver/Event.h>
 #include <sun/net/httpserver/ExchangeImpl.h>
 #include <sun/net/httpserver/HttpContextImpl.h>
@@ -170,11 +159,10 @@ void ChunkedOutputStream::close() {
 				if (!$nc(is)->isClosed()) {
 					is->close();
 				}
-			} catch ($IOException&) {
-				$catch();
+			} catch ($IOException& e) {
 			}
-		} catch ($Throwable&) {
-			$assign(var$0, $catch());
+		} catch ($Throwable& var$1) {
+			$assign(var$0, var$1);
 		} /*finally*/ {
 			this->closed = true;
 		}

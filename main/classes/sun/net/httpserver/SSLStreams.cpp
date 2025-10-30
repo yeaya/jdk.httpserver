@@ -2,19 +2,8 @@
 
 #include <com/sun/net/httpserver/HttpsConfigurator.h>
 #include <com/sun/net/httpserver/HttpsParameters.h>
-#include <java/lang/Array.h>
 #include <java/lang/AssertionError.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/IllegalArgumentException.h>
-#include <java/lang/InnerClassInfo.h>
-#include <java/lang/MethodInfo.h>
 #include <java/lang/Runnable.h>
-#include <java/lang/String.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/InetSocketAddress.h>
 #include <java/net/Socket.h>
 #include <java/net/SocketAddress.h>
@@ -180,8 +169,7 @@ void SSLStreams::configureEngine($HttpsConfigurator* cfg, $InetSocketAddress* ad
 			if (params->getCipherSuites() != nullptr) {
 				try {
 					$nc(this->engine)->setEnabledCipherSuites($(params->getCipherSuites()));
-				} catch ($IllegalArgumentException&) {
-					$catch();
+				} catch ($IllegalArgumentException& e) {
 				}
 			}
 			$nc(this->engine)->setNeedClientAuth(params->getNeedClientAuth());
@@ -189,8 +177,7 @@ void SSLStreams::configureEngine($HttpsConfigurator* cfg, $InetSocketAddress* ad
 			if (params->getProtocols() != nullptr) {
 				try {
 					$nc(this->engine)->setEnabledProtocols($(params->getProtocols()));
-				} catch ($IllegalArgumentException&) {
-					$catch();
+				} catch ($IllegalArgumentException& e) {
 				}
 			}
 		}
@@ -338,8 +325,8 @@ void SSLStreams::doClosure() {
 			$init($SSLEngineResult$Status);
 			$init($SSLEngineResult$HandshakeStatus);
 			} while (st != $SSLEngineResult$Status::CLOSED && !(st == $SSLEngineResult$Status::OK && hs == $SSLEngineResult$HandshakeStatus::NOT_HANDSHAKING));
-		} catch ($Throwable&) {
-			$assign(var$0, $catch());
+		} catch ($Throwable& var$1) {
+			$assign(var$0, var$1);
 		} /*finally*/ {
 			$nc(this->handshaking)->unlock();
 		}
@@ -361,7 +348,7 @@ void SSLStreams::doHandshake($SSLEngineResult$HandshakeStatus* hs_status$renamed
 			$init($SSLEngineResult$HandshakeStatus);
 			while (hs_status != $SSLEngineResult$HandshakeStatus::FINISHED && hs_status != $SSLEngineResult$HandshakeStatus::NOT_HANDSHAKING) {
 				$var($SSLStreams$WrapperResult, r, nullptr);
-					$init($SSLStreams$1);
+				$init($SSLStreams$1);
 				{
 					$var($Runnable, task, nullptr)
 					switch ($nc($SSLStreams$1::$SwitchMap$javax$net$ssl$SSLEngineResult$HandshakeStatus)->get($nc((hs_status))->ordinal())) {
@@ -394,8 +381,8 @@ void SSLStreams::doHandshake($SSLEngineResult$HandshakeStatus* hs_status$renamed
 				}
 				hs_status = $nc($nc(r)->result)->getHandshakeStatus();
 			}
-		} catch ($Throwable&) {
-			$assign(var$0, $catch());
+		} catch ($Throwable& var$1) {
+			$assign(var$0, var$1);
 		} /*finally*/ {
 			$nc(this->handshaking)->unlock();
 		}

@@ -1,15 +1,6 @@
 #include <sun/net/httpserver/SSLStreams$1.h>
 
-#include <java/lang/Array.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/EnclosingMethodInfo.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/InnerClassInfo.h>
 #include <java/lang/NoSuchFieldError.h>
-#include <java/lang/String.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <javax/net/ssl/SSLEngineResult$HandshakeStatus.h>
 #include <sun/net/httpserver/SSLStreams.h>
 #include <jcpp.h>
@@ -75,18 +66,15 @@ void clinit$SSLStreams$1($Class* class$) {
 	{
 		try {
 			$nc(SSLStreams$1::$SwitchMap$javax$net$ssl$SSLEngineResult$HandshakeStatus)->set($SSLEngineResult$HandshakeStatus::NEED_TASK->ordinal(), 1);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 		try {
 			$nc(SSLStreams$1::$SwitchMap$javax$net$ssl$SSLEngineResult$HandshakeStatus)->set($SSLEngineResult$HandshakeStatus::NEED_WRAP->ordinal(), 2);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 		try {
 			$nc(SSLStreams$1::$SwitchMap$javax$net$ssl$SSLEngineResult$HandshakeStatus)->set($SSLEngineResult$HandshakeStatus::NEED_UNWRAP->ordinal(), 3);
-		} catch ($NoSuchFieldError&) {
-			$catch();
+		} catch ($NoSuchFieldError& ex) {
 		}
 	}
 }

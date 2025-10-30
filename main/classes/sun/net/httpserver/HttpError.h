@@ -16,8 +16,10 @@ public:
 	void init$($String* msg);
 	static const int64_t serialVersionUID = (int64_t)0x79B3DD6FB9863C03;
 	HttpError(const HttpError& e);
-	HttpError wrapper$();
-	virtual void throwWrapper$() override;
+	virtual void throw$() override;
+	inline HttpError* operator ->() {
+		return (HttpError*)throwing$;
+	}
 };
 
 		} // httpserver

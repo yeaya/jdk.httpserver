@@ -5,32 +5,14 @@
 #include <com/sun/net/httpserver/HttpServer.h>
 #include <com/sun/net/httpserver/HttpsConfigurator.h>
 #include <java/io/IOException.h>
-#include <java/io/PrintStream.h>
-#include <java/lang/Array.h>
 #include <java/lang/AssertionError.h>
-#include <java/lang/Class.h>
-#include <java/lang/ClassInfo.h>
-#include <java/lang/Exception.h>
-#include <java/lang/FieldInfo.h>
-#include <java/lang/IllegalArgumentException.h>
 #include <java/lang/IllegalStateException.h>
-#include <java/lang/InnerClassInfo.h>
 #include <java/lang/InterruptedException.h>
-#include <java/lang/Long.h>
-#include <java/lang/MethodInfo.h>
-#include <java/lang/NullPointerException.h>
 #include <java/lang/Runnable.h>
 #include <java/lang/StackTraceElement.h>
-#include <java/lang/String.h>
-#include <java/lang/StringBuilder.h>
 #include <java/lang/System$Logger$Level.h>
 #include <java/lang/System$Logger.h>
-#include <java/lang/System.h>
-#include <java/lang/Thread.h>
 #include <java/lang/ThreadGroup.h>
-#include <java/lang/Throwable.h>
-#include <java/lang/reflect/Constructor.h>
-#include <java/lang/reflect/Method.h>
 #include <java/net/BindException.h>
 #include <java/net/InetSocketAddress.h>
 #include <java/net/ServerSocket.h>
@@ -379,8 +361,7 @@ void ServerImpl::stop(int32_t delay) {
 	this->terminating = true;
 	try {
 		$nc(this->schan)->close();
-	} catch ($IOException&) {
-		$catch();
+	} catch ($IOException& e) {
 	}
 	$nc(this->selector)->wakeup();
 	int64_t latest = $System::currentTimeMillis() + delay * 1000;
@@ -412,8 +393,7 @@ void ServerImpl::stop(int32_t delay) {
 	if (this->dispatcherThread != nullptr && this->dispatcherThread != $Thread::currentThread()) {
 		try {
 			$nc(this->dispatcherThread)->join();
-		} catch ($InterruptedException&) {
-			$var($InterruptedException, e, $catch());
+		} catch ($InterruptedException& e) {
 			$($Thread::currentThread())->interrupt();
 			$init($System$Logger$Level);
 			$nc(this->logger)->log($System$Logger$Level::TRACE, "ServerImpl.stop: "_s, static_cast<$Throwable*>(e));
@@ -493,7 +473,6 @@ void ServerImpl::dprint($String* s) {
 	$synchronized(class$) {
 		$init(ServerImpl);
 		if (ServerImpl::debug) {
-			$init($System);
 			$nc($System::out)->println(s);
 		}
 	}
@@ -504,7 +483,6 @@ void ServerImpl::dprint($Exception* e) {
 	$synchronized(class$) {
 		$init(ServerImpl);
 		if (ServerImpl::debug) {
-			$init($System);
 			$nc($System::out)->println($of(e));
 			$nc(e)->printStackTrace();
 		}
@@ -579,8 +557,7 @@ void ServerImpl::delay() {
 	$Thread::yield();
 	try {
 		$Thread::sleep(200);
-	} catch ($InterruptedException&) {
-		$catch();
+	} catch ($InterruptedException& e) {
 	}
 }
 
